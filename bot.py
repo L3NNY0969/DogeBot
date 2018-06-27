@@ -38,14 +38,16 @@ async def on_ready():
 @bot.event
 async def on_guild_join(guild):
     lol = bot.get_channel(461050385583570954)
-    em = discord.Embed(color=discord.Color(value=0x11f95e))
+    em = discord.Embed(color=discord.Color(value=0x00ff00))
     em.title = "I have joined new server!"
     em.description = f"Server: {guild}"
     em.set_footer(text=f"ID: {guild.id}")
+    em.add_field(name="Owner", value=str(guild.owner))
+    em.add_field(name="Member Count", value=len(guild.members))
     em.set_thumbnail(url=guild.icon_url)
     await lol.send(embed=em)
     try:
-        await guild.channels[0].send(f"Hello my peeps. Im a discord bot created by L3NNY#4519. Try me out by doing ``+help``!")
+        await guild.channels[0].send(f"Sup nerds. Im a gucci, dank bot named... well you already know. Do ``-help`` to see all them dank commands I have.")
     except discord.Forbidden:
         pass
       
@@ -56,6 +58,8 @@ async def on_guild_remove(guild):
     em.title = "I have left a server."
     em.description = f"Server: {guild}"
     em.set_footer(text=f"ID: {guild.id}")
+    em.add_field(name="Owner", value=str(guild.owner))
+    em.add_field(name="Member Count", value=len(guild.members))
     await lol.send(embed=em)   
     
 @bot.command()
